@@ -1,0 +1,24 @@
+{
+  "Routes": [
+    {
+        "DownstreamPathTemplate": "/api/Ticket",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+            "Host": "perla-metro-ticket-service.onrender.com",
+            "Port": 443
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket",
+        "UpstreamHttpMethod": [ "GET", "POST" ],
+        "Key": "tickets-list",
+        "RateLimitOptions": {
+            "EnableRateLimiting": true,
+            "Period": "1m",
+            "PeriodTimespan": 60,
+            "Limit": 100,
+            "QuotaExceededMessage": "Too many ticket requests. Please wait."
+      }
+    }
+  ]
+}
