@@ -4,14 +4,13 @@ API Gateway para el sistema de transporte subterráneo de Antofagasta. Implement
 
 ## Arquitectura y Patrón de Diseño
 
-### Arquitectura: Monolito Distribuido con SOA (Service-Oriented Architecture)
+### Arquitectura: Gateway Híbrido en un Monolito Distribuido con SOA (Service-Oriented Architecture)
 
-El Ticket Service implementa una arquitectura de capas (Layered Architecture) dentro del contexto SOA
+El proyecto implementa una arquitectura de **Monolito Distribuido** bajo un enfoque **SOA**. La pieza central es la `API Main`, que no actúa como un simple gateway, sino que desempeña un rol dual y estratégico:
 
-```
+1.  **API Gateway (con Ocelot):** Para los microservicios de negocio (`Routes`, `Tickets`, `Stations`), la `API Main` funciona como un **API Gateway** puro. Utiliza **Ocelot** para enrutar las peticiones externas hacia el servicio interno correspondiente. Esto centraliza la gestión de rutas, la seguridad y simplifica la comunicación desde el cliente.
 
-```
-
+2.  **Fachada de Autenticación (con Controller local):** Para la gestión de usuarios, la `API Main` actúa como una **Fachada (Façade)**. En lugar de redirigir el tráfico, expone su propio `AuthController`. Este controlador se comunica internamente mediante `HttpClient` con el **Users Service** (que es un monolito independiente). Esta decisión de diseño centraliza la lógica de autenticación y la generación de tokens JWT en el gateway, proveyendo una capa de seguridad robusta y desacoplando al cliente de la implementación interna del servicio de usuarios.
 ### Patrones de Diseño Implementados:
 
 1. **Dependency Injection:** Inyección de dependencias
