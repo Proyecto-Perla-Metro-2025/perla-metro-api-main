@@ -1,0 +1,116 @@
+{
+  "Routes": [
+    
+    {
+      "DownstreamPathTemplate": "/api/Ticket",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-ticket-service.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/Ticket",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin" 
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Ticket/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-ticket-service.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/Ticket/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin" 
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/routes",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [ { "Host": "perla-metro-routes-service.onrender.com", "Port": 443 } ],
+      "UpstreamPathTemplate": "/api/routes",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/routes/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [ { "Host": "perla-metro-routes-service.onrender.com", "Port": 443 } ],
+      "UpstreamPathTemplate": "/api/routes/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/routes",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [ { "Host": "perla-metro-routes-service.onrender.com", "Port": 443 } ],
+      "UpstreamPathTemplate": "/api/routes",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin" 
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/routes/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [ { "Host": "perla-metro-routes-service.onrender.com", "Port": 443 } ],
+      "UpstreamPathTemplate": "/api/routes/{id}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin"
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Station",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-stations-service-c5ry.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/Station",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin" 
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/station/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-stations-service-c5ry.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/Station/{id}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin" 
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Station/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-stations-service-c5ry.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/Station/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ]
+}
