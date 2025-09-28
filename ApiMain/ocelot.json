@@ -13,6 +13,7 @@
         "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
+
       "DownstreamPathTemplate": "/api/routes",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [ { "Host": "perla-metro-routes-service.onrender.com", "Port": 443 } ],
@@ -54,6 +55,42 @@
       "RouteClaimsRequirement": {
         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin"
       }
+
+        "DownstreamPathTemplate": "/api/Ticket/{id}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+            "Host": "perla-metro-ticket-service.onrender.com",
+            "Port": 443
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}",
+        "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+    },
+    {
+        "DownstreamPathTemplate": "/api/Station",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+            "Host": "perla-metro-stations-service-c5ry.onrender.com",
+            "Port": 443
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Station",
+        "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+        "DownstreamPathTemplate": "/api/station/{id}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+            "Host": "perla-metro-stations-service-c5ry.onrender.com",
+            "Port": 443
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Station/{id}",
+        "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+
     }
 
   ]
