@@ -1,0 +1,28 @@
+{
+  "Routes": [
+    {
+        "DownstreamPathTemplate": "/api/Ticket",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+            "Host": "perla-metro-ticket-service.onrender.com",
+            "Port": 443
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket",
+        "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+            "Host": "perla-metro-ticket-service.onrender.com",
+            "Port": 443
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}",
+        "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+    }
+  ]
+}
