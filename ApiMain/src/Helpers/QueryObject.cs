@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UsersService.src.Helper
+namespace ApiMain.src.Helper
 {
     public class QueryObject
     {
