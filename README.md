@@ -94,3 +94,124 @@ cd ApiMain
 dotnet run
 ```
 
+### Ejemplos de uso Station-Service (Postman):
+Considerando tu URL como = *"https://nombre-repositorio.onrender.com"*
+
+**1. POST:**
+```
+URL: https://nombre-repositorio.onrender.com/api/Station
+Body (JSON):
+{
+  "Name": "Estación La Torre",
+  "Location": "Antofagasta, calle La Torre",
+  "StopType": "Origen"
+}
+Response (200 OK):
+{
+    "data": {
+        "name": "Estación La Torre",
+        "location": "Calle La Torre, Antofagasta",
+        "stopType": "Origen"
+    },
+    "message": "Station created successfully",
+    "success": true
+}
+```
+**2. GET /api/Station:**
+```
+URL: https://nombre-repositorio.onrender.com/api/Station
+Response (200 OK):
+{
+    "data": [
+        {
+            "id": "2fb729b3-5af3-4fa6-b2ec-a2173f9adb30",
+            "name": "Estación La Torre",
+            "location": "Calle La Torre, Antofagasta",
+            "stopType": "Origen",
+            "status": "Active",
+            "isActive": true
+        }
+    ],
+    "message": "Stations retrieved successfully",
+    "success": true
+}
+```
+**2.1. GET /api/Station?name=La%20Torre:**
+```
+URL: https://nombre-repositorio.onrender.com/api/Station?name=La%20Torre
+Response (200 OK):
+{
+    "data": [
+        {
+            "id": "2fb729b3-5af3-4fa6-b2ec-a2173f9adb30",
+            "name": "Estación La Torre",
+            "location": "Calle La Torre, Antofagasta",
+            "stopType": "Origen",
+            "status": "Active",
+            "isActive": true
+        }
+    ],
+    "message": "Stations retrieved successfully",
+    "success": true
+}
+```
+**3. GET /api/Station/{Id}:**
+```
+URL: https://nombre-repositorio.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
+Response (200 OK)
+{
+    "data": {
+        "id": "2fb729b3-5af3-4fa6-b2ec-a2173f9adb30",
+        "name": "Estación La Torre",
+        "location": "Antofagasta, calle La Torre",
+        "stopType": "Origen",
+        "status": "Active",
+        "isActive": true
+    },
+    "message": "Station retrieved successfully",
+    "success": true
+}
+```
+**4. PUT /api/Station/{Id}:**
+```
+URL: https://nombre-repositorio.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
+Body (JSON):
+{
+  "Name": "Estación La Torre 2",
+  "Location": "Antofagasta, calle La Torre",
+  "StopType": "Origen"
+}
+Response (200 OK):
+{
+    "data": {
+        "id": "2fb729b3-5af3-4fa6-b2ec-a2173f9adb30",
+        "name": "Estación La Torre 2",
+        "location": "Antofagasta, calle La Torre",
+        "stopType": "Origen",
+        "status": "Active",
+        "isActive": true
+    },
+    "message": "Station updated successfully",
+    "success": true
+}
+```
+**4. DELETE /api/Station/{Id}:**
+```
+URL: https://nombre-repositorio.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
+Response (200 OK):
+{
+    "data": {
+        "id": "2fb729b3-5af3-4fa6-b2ec-a2173f9adb30",
+        "name": "Estación La Torre 2",
+        "location": "Calle La Torre, Antofagasta",
+        "stopType": "Origen",
+        "status": "Inactive",
+        "isActive": false
+    },
+    "message": "Station deleted successfully",
+    "success": true
+}
+```
+### Observaciones / Consideraciones
+
+- La base de datos para station-service se encuentra desplegada en Railway en modo *Serverless*, lo que significa que, en caso de bajo tráfico, se apagará automáticamente y se encenderá al recibir la primera solicitud. Por lo tanto, se solicita reintentar las solicitudes iniciales.
