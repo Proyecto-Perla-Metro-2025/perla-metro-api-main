@@ -6,6 +6,7 @@ using ApiMain.src.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+Console.WriteLine("--> [DIAGNÓSTICO] Iniciando la configuración del builder...");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -119,7 +120,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
-
+Console.WriteLine("--> [DIAGNÓSTICO] Configuración de servicios completada. Creando la app...");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -135,8 +136,13 @@ app.UseCors("AllowAll");
 // Authentication must come before Authorization
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
-app.MapControllers();
+
 
 await app.UseOcelot();
 
