@@ -51,18 +51,24 @@ El Ticket Service implementa una arquitectura de capas (Layered Architecture) de
 | `POST` | `/api/auth/login` | Iniciar sesión y obtener JWT | No requerida |
 
 ### Servicios (Proxy vía Ocelot)
-| Método | Endpoint | Descripción | Autenticación |
-|--------|----------|-------------|---------------|
-| `GET` | `/api/Ticket` | Listar tickets | JWT + Admin |
-| `POST` | `/api/Ticket` | Crear ticket | JWT + Admin |
-| `GET` | `/api/Ticket/{id}` | Obtener ticket | JWT + Admin |
-| `PUT` | `/api/Ticket/{id}` | Actualizar ticket | JWT + Admin |
-| `DELETE` | `/api/Ticket/{id}` | Eliminar ticket | JWT + Admin |
-| `GET` | `/api/Station` | Listar todas las estaciones | JWT + Admin |
-| `POST` | `/api/Station` | Crear nueva estación | JWT + Admin |
-| `GET` | `/api/Station/{id}` | Obtener estación por ID | - |
-| `PUT` | `/api/Station/{id}` | Actualizar estación | JWT + Admin |
-| `DELETE` | `/api/Station/{id}` | Eliminar estación (soft delete) | JWT + Admin |
+| Método   | Endpoint           | Descripción                      | Autenticación  |
+| :------- | :----------------- | :------------------------------- | :------------- |
+| `GET`    | `/api/Ticket`      | Listar tickets                   | JWT + Admin    |
+| `POST`   | `/api/Ticket`      | Crear ticket                     | JWT + Admin    |
+| `GET`    | `/api/Ticket/{id}` | Obtener ticket                   | JWT + Admin    |
+| `PUT`    | `/api/Ticket/{id}` | Actualizar ticket                | JWT + Admin    |
+| `DELETE` | `/api/Ticket/{id}` | Eliminar ticket                  | JWT + Admin    |
+| `GET`    | `/api/routes`      | Listar todas las rutas           | No requerida   |
+| `GET`    | `/api/routes/{id}` | Obtener ruta por ID              | No requerida   |
+| `POST`   | `/api/routes`      | Crear nueva ruta                 | JWT + Admin    |
+| `PUT`    | `/api/routes/{id}` | Actualizar ruta                  | JWT + Admin    |
+| `DELETE` | `/api/routes/{id}` | Eliminar ruta (soft delete)      | JWT + Admin    |
+| `GET`    | `/api/Station`     | Listar todas las estaciones      | JWT + Admin    |
+| `POST`   | `/api/Station`     | Crear nueva estación             | JWT + Admin    |
+| `GET`    | `/api/Station/{id}`| Obtener estación por ID          | -              |
+| `PUT`    | `/api/Station/{id}`| Actualizar estación              | JWT + Admin    |
+| `DELETE` | `/api/Station/{id}`| Eliminar estación (soft delete)  | JWT + Admin    |
+
 
 
 ## 🚀 Instalación y Configuración
