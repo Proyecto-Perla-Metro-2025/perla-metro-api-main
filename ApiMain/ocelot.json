@@ -80,7 +80,13 @@
         { "Host": "perla-metro-stations-service-c5ry.onrender.com", "Port": 443 }
       ],
       "UpstreamPathTemplate": "/api/Station",
-      "UpstreamHttpMethod": [ "GET", "POST" ]
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin" 
+      }
     },
     {
       "DownstreamPathTemplate": "/api/station/{id}",
@@ -89,7 +95,22 @@
         { "Host": "perla-metro-stations-service-c5ry.onrender.com", "Port": 443 }
       ],
       "UpstreamPathTemplate": "/api/Station/{id}",
-      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin" 
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Station/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-stations-service-c5ry.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/Station/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
     }
   ]
 }
