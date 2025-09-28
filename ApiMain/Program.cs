@@ -1,6 +1,11 @@
-<<<<<<< HEAD
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using System.Text;
+using ApiMain.src.Interfaces;
+using ApiMain.src.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,15 +15,6 @@ builder.Services.AddOcelot(builder.Configuration);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
-=======
-using System.Text;
-using ApiMain.src.Interfaces;
-using ApiMain.src.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-
-var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddControllers().AddJsonOptions(opts =>
@@ -123,7 +119,6 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
->>>>>>> origin/dev
 
 var app = builder.Build();
 
