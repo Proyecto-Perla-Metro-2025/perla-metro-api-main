@@ -412,6 +412,145 @@ Response (200 OK):
     "success": true
 }
 ```
+### Ejemplos de uso Users-Service (Postman):
+**1. POST /api/Auth/login:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Auth/login
+Body (JSON):
+{
+  "email": "Admin@perlametro.cl",
+  "password": "Password123+"
+}
+Response (200 OK):
+{
+    {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjA1Y2UxZjc4LTk5NjYtNGRlYy05NDdhLTEzZWU5MWRkMjViZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IkFkbWluQHBlcmxhbWV0cm8uY2wiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6Ik5vbWJyZV9BZG1pbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3N1cm5hbWUiOiJBcGVsbGlkb19BZG1pbiIsImZ1bGxOYW1lIjoiTm9tYnJlX0FkbWluIEFwZWxsaWRvX0FkbWluIiwicmVnaXN0cmF0aW9uRGF0ZSI6IjIwMjUtMDktMjUiLCJqdGkiOiJmYmIwYmQ5OC1kMTQxLTRkNTYtYjA0Ny1mMWU4ZGJmN2RjYWQiLCJpYXQiOjE3NTkxMDYzNTQsImV4cCI6MTc1OTEwOTk1NCwiaXNzIjoiaHR0cHM6Ly9wZXJsYS1tZXRyby1hcGktbWFpbi5vbnJlbmRlci5jb20iLCJhdWQiOiJodHRwczovL3BlcmxhLW1ldHJvLWFwaS1tYWluLm9ucmVuZGVyLmNvbSJ9.fW4GuAgJgo3Z6jLuQKEM-_vc0W-zOIOEStEpoxBcl4g",
+    "expiresAt": "2025-09-29T01:39:14.9533373Z",
+    "user": {
+        "id": "05ce1f78-9966-4dec-947a-13ee91dd25be",
+        "email": "Admin@perlametro.cl",
+        "role": "Admin",
+        "fullName": "Nombre_Admin Apellido_Admin"
+        }
+    }
+}
+```
+
+**2. POST /api/Auth/Register:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Auth/Register
+Body (JSON):
+{
+  "name": "Juan",
+  "surename": "Pohl",
+  "email": "example@perlametro.cl",
+  "password": "Password1234*"
+}
+Response (200 OK):
+{
+    {
+    "id": "022a46f3-538e-4ccb-b68a-05cd9922d7fa",
+    "email": "example@perlametro.cl",
+    "name": "Juan",
+    "sureName": "Pohl",
+    "role": "User",
+    "createdAt": "0001-01-01T00:00:00",
+    "isActive": true
+    }
+}
+```
+**3. Get /api/Auth/GetAll:**
+* **Nota:** Este endpoint es protegido y requiere un Bearer Token con rol de "Admin".
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Auth/GetAll
+Response (200 OK):
+{
+    [
+        {
+            "id": "05ce1f78-9966-4dec-947a-13ee91dd25be",
+            "fullname": "Nombre_Admin Apellido_Admin",
+            "email": "Admin@perlametro.cl",
+            "isActive": true,
+            "registrationDate": "2025-09-25"
+        },
+        ...
+        {
+            "id": "022a46f3-538e-4ccb-b68a-05cd9922d7fa",
+            "fullname": "Juan Pohl",
+            "email": "example@perlametro.cl",
+            "isActive": true,
+            "registrationDate": "2025-09-29"
+        }
+    ]
+}
+```
+**4. Get /api/Auth/GetUser/{id}:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Auth/GetUser?id=05ce1f78-9966-4dec-947a-13ee91dd25be
+Response (200 OK):
+{
+    "id": "05ce1f78-9966-4dec-947a-13ee91dd25be",
+    "fullname": "Nombre_Admin Apellido_Admin",
+    "email": "Admin@perlametro.cl",
+    "isActive": true,
+    "registrationDate": "2025-09-25"
+}
+```
+**5. Get /api/Auth/UserFilter:**
+* **Nota:** Este endpoint es protegido y requiere un Bearer Token con rol de "Admin".
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Auth/UserFilter?isActive=false
+Response (200 OK):
+{
+    [
+        {
+            "id": "f8d87978-173a-4a30-9ad2-ade53f2f5095",
+            "fullname": "Adrian Morgan",
+            "email": "sWhxRyHcK@perlametro.cl",
+            "isActive": false,
+            "registrationDate": "2025-09-25"
+        },
+        {
+            "id": "3e72480f-b4a8-49f1-9da8-940101ceeb5b",
+            "fullname": "stdasd string",
+            "email": "string111@perlametro.cl",
+            "isActive": false,
+            "registrationDate": "2025-09-27"
+        }
+    ]
+}
+```
+**6. PUT /api/Auth/update-user:**
+* **Nota:** Este endpoint es protegido y requiere un Bearer Token.
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Auth/update-user
+Body (JSON):
+{
+  "password": "Password1234+"
+}
+Response (200 OK):
+{
+    {
+    "id": "022a46f3-538e-4ccb-b68a-05cd9922d7fa",
+    "email": "example@perlametro.cl",
+    "name": "Juan",
+    "sureName": "Pohl",
+    "role": "User",
+    "createdAt": "0001-01-01T00:00:00",
+    "isActive": true
+    }
+}
+```
+**7. Get /api/Auth/enable-disable/{id}:**
+* **Nota:** Este endpoint es protegido y requiere un Bearer Token con rol de "Admin".
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/api/Auth/enable-disable?Id=022a46f3-538e-4ccb-b68a-05cd9922d7fa
+Response (200 OK):
+{
+
+}
+```
+
 ### Observaciones / Consideraciones
 
 - La base de datos para station-service se encuentra desplegada en Railway en modo Serverless, lo que significa que, en caso de bajo tráfico, se apagará automáticamente y se encenderá al recibir la primera solicitud. Por lo tanto, se solicita reintentar las primeras solicitudes realizadas.
