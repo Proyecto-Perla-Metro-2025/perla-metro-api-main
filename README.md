@@ -314,6 +314,103 @@ Response (200 OK):
     "message": "Station deleted successfully",
     "success": true
 }
+
+
+```
+### Ejemplos de uso Route-Service (Postman):
+**1. GET /api/routes (Listar todas las rutas)**
+* **Nota:** Este endpoint es público y no requiere autenticación.
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/routes
+Response (200 OK):
+{
+    "data": [
+        {
+            "id": "6e6bebc7-fdff-4877-a77e-c513a581fcb4",
+            "originStation": "Estación Central",
+            "destinationStation": "Estación La Portada",
+            "startTime": "2025-09-27T06:00:00",
+            "endTime": "2025-09-27T07:00:00",
+            "intermediateStops": [ "Estación Prat", "Estación Latorre" ],
+            "isActive": true
+        }
+    ],
+    "message": "Routes retrieved successfully",
+    "success": true
+}
+```
+**2. POST /api/routes (Crear una ruta)**
+* **Nota:** Este endpoint es protegido y requiere un Bearer Token con rol de "Admin".
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/routes
+
+{
+    "originStation": "Estación Alfa",
+    "destinationStation": "Estación Omega",
+    "startTime": "2025-10-01T08:00:00Z",
+    "endTime": "2025-10-01T09:30:00Z",
+    "intermediateStops": [ "Estación Beta" ]
+}
+Response (201 Created):
+{
+"data": {
+    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "originStation": "Estación Alfa",
+    "destinationStation": "Estación Omega",
+    "startTime": "2025-10-01T08:00:00Z",
+    "endTime": "2025-10-01T09:30:00Z",
+    "intermediateStops": [ "Estación Beta" ],
+    "isActive": true
+    },
+    "message": "Route created successfully",
+    "success": true
+}
+```
+**3. GET /api/routes/{id} (Obtener por ID)**
+* **Nota:** Este endpoint es público.
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/routes/6e6bebc7-fdff-4877-a77e-c513a581fcb4
+Response (200 OK):
+{
+"data": {
+    "id": "6e6bebc7-fdff-4877-a77e-c513a581fcb4",
+    "originStation": "Estación Central",
+    "destinationStation": "Estación La Portada",
+    "startTime": "2025-09-27T06:00:00",
+    "endTime": "2025-09-27T07:00:00",
+    "intermediateStops": [ "Estación Prat", "Estación Latorre" ],
+    "isActive": true
+    },
+    "message": "Route retrieved successfully",
+    "success": true
+}
+```
+**4. PUT /api/routes/{id} (Actualizar una ruta)**
+* **Nota:** Este endpoint es protegido y requiere un Bearer Token con rol de "Admin".
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/routes/a1b2c3d4-e5f6-7890-1234-567890abcdef
+Body (JSON):
+{
+    "originStation": "Estación Alfa (Actualizada)",
+    "destinationStation": "Estación Omega (Nueva)"
+}
+Response (200 OK):
+{
+    "data": null,
+    "message": "Route updated successfully",
+    "success": true
+}
+```
+**5. DELETE /api/routes/{id} (Desactivar una ruta)**
+* **Nota:** Este endpoint es protegido y requiere un Bearer Token con rol de "Admin".
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/routes/a1b2c3d4-e5f6-7890-1234-567890abcdef
+Response (200 OK):
+{
+    "data": null,
+    "message": "Route deactivated successfully",
+    "success": true
+}
 ```
 ### Observaciones / Consideraciones
 
