@@ -47,7 +47,13 @@ El proyecto implementa una arquitectura de **Monolito Distribuido** bajo un enfo
 ### Autenticación (Controller)
 | Método | Endpoint | Descripción | Autenticación |
 |--------|----------|-------------|---------------|
-| `POST` | `/api/auth/login` | Iniciar sesión y obtener JWT | No requerida |
+| `POST` | `/api/Auth/login` | Iniciar sesión y obtener JWT | No requerida |
+| `POST` | `/api/Auth/Register` | Registrar nuevo ususario | No requerida |
+| `GET` | `/api/Auth/GetAll` | Listado de todos los usuarios | JWT + Admin |
+| `GET` | `/api/Auth/GetUser{id}` | Obtener un usuario por id  | No requerida |
+| `GET` | `/api/Auth/UserFilter` | Listado de usuarios aplicando un filtro| JWT + Admin |
+| `Put` | `/api/Auth/update-user` | Actualiza la información de un usuario | JWT |
+| `Put` | `/api/Auth/enable-disable/{id}` | Permite actualizar el estado de un usuario, es decir activar o desactivar la cuenta de un usuario | JWT + Admin |
 
 ### Servicios (Proxy vía Ocelot)
 | Método   | Endpoint           | Descripción                      | Autenticación  |
@@ -318,3 +324,6 @@ Response (200 OK):
 - El sistema Health Check de Render frecuentemente hace peticiones URL a la raíz del Gateway (Ejemplo: GET/), esto genera errores de tipo *UnableToFindDownstreamRouteError* en los logs de API Main, estos errores son normales y esperados, no indican un fallo en la aplicación.
 
 - Durante el primer despliegue es posible que los logs muestren un mensaje como *New primary port detected... Restarting deploy....*, es un comportamiento normal y no requiere ninguna acción por parte del usuario.
+
+### URL de Despliegue Directo
+El despliegue de este servicio se encuentra en `https://perla-metro-api-main-ohy4.onrender.com/`.
