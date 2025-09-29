@@ -94,6 +94,103 @@ cd ApiMain
 dotnet run
 ```
 
+### Ejemplos de uso Ticket-Service (Postman):
+
+**1. GET:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Ticket
+Response (200 OK):
+{
+    "data": [
+        {
+            "id": "7692ea47-3454-4079-979f-fe6b95b191d2",
+            "passengerId": "raul",
+            "createdAt": "2025-09-27T23:42:37.5060526-03:00",
+            "ticketType": "vuelta",
+            "ticketStatus": "caducado",
+            "amount": 77777777
+        }
+    ]
+    "message": "Tickets retrieved successfully",
+    "success": true
+}
+```
+
+**2. POST:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Ticket
+Body (JSON):
+{
+    "passengerId":"550e8400-e29b-41d4-a716-446655440000",
+    "ticketType":"ida",
+    "ticketStatus": "activo",
+    "amount":1500
+}
+Response (200 OK):
+{
+    "data": {
+        "id": "96b1531a-e129-449d-b65a-37c7235a31d1",
+        "passengerId": "passenger-jhon77",
+        "createdAt": "2025-09-28T21:13:54.0874644-03:00",
+        "ticketType": "vuelta",
+        "ticketStatus": "activo",
+        "amount": 777
+    },
+    "message": "Ticket created successfully",
+    "success": true
+}
+```
+
+**3. GET/{id}:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Ticket/{id}
+Response (200 OK):
+{
+    "data": {
+        "id": "96b1531a-e129-449d-b65a-37c7235a31d1",
+        "passengerId": "passenger-jhon77",
+        "createdAt": "2025-09-28T21:13:54.0874644-03:00",
+        "ticketType": "vuelta",
+        "amount": 777
+    },
+    "message": "Ticket created successfully",
+    "success": true
+}
+```
+
+**4. PUT/{id}:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Ticket/{id} 
+Body (JSON):
+{
+    "amount":7000
+}
+Response (200 OK):
+{
+    "data": {
+        "id": "96b1531a-e129-449d-b65a-37c7235a31d1",
+        "passengerId": "passenger-jhon77",
+        "createdAt": "2025-09-28T21:17:10.8781898-03:00",
+        "ticketType": "vuelta",
+        "ticketStatus": "activo",
+        "amount": 77777777
+    },
+    "message": "Ticket updated successfully",
+    "success": true
+}
+```
+
+**5. DELETE/{id}:**
+```
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Ticket/{id}
+Response (200 OK):
+{
+    "data": null,
+    "message": "Ticket deleted successfully",
+    "success": true
+}
+```
+
 ### Ejemplos de uso Station-Service (Postman):
 Considerando tu URL como = *"https://nombre-repositorio.onrender.com"*
 
@@ -119,7 +216,7 @@ Response (200 OK):
 ```
 **2. GET /api/Station:**
 ```
-URL: https://nombre-repositorio.onrender.com/api/Station
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Station
 Response (200 OK):
 {
     "data": [
@@ -138,7 +235,7 @@ Response (200 OK):
 ```
 **2.1. GET /api/Station?name=La%20Torre:**
 ```
-URL: https://nombre-repositorio.onrender.com/api/Station?name=La%20Torre
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Station?name=La%20Torre
 Response (200 OK):
 {
     "data": [
@@ -157,7 +254,7 @@ Response (200 OK):
 ```
 **3. GET /api/Station/{Id}:**
 ```
-URL: https://nombre-repositorio.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
 Response (200 OK)
 {
     "data": {
@@ -174,7 +271,7 @@ Response (200 OK)
 ```
 **4. PUT /api/Station/{Id}:**
 ```
-URL: https://nombre-repositorio.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
 Body (JSON):
 {
   "Name": "Estación La Torre 2",
@@ -197,7 +294,7 @@ Response (200 OK):
 ```
 **4. DELETE /api/Station/{Id}:**
 ```
-URL: https://nombre-repositorio.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Station/2fb729b3-5af3-4fa6-b2ec-a2173f9adb30
 Response (200 OK):
 {
     "data": {
@@ -214,4 +311,10 @@ Response (200 OK):
 ```
 ### Observaciones / Consideraciones
 
-- La base de datos para station-service se encuentra desplegada en Railway en modo *Serverless*, lo que significa que, en caso de bajo tráfico, se apagará automáticamente y se encenderá al recibir la primera solicitud. Por lo tanto, se solicita reintentar las solicitudes iniciales.
+- La base de datos para station-service se encuentra desplegada en Railway en modo Serverless, lo que significa que, en caso de bajo tráfico, se apagará automáticamente y se encenderá al recibir la primera solicitud. Por lo tanto, se solicita reintentar las primeras solicitudes realizadas.
+
+- Los servicios se encuentran desplegados en el plan gratuito de Render, siendo estos suspendidos automáticamente tras 15 minutos de actividad ("Se duermen"), por lo tanto, se solicita reintentar las primeras solicitudes realizadas ("Despertarlo")
+
+- El sistema Health Check de Render frecuentemente hace peticiones URL a la raíz del Gateway (Ejemplo: GET/), esto genera errores de tipo *UnableToFindDownstreamRouteError* en los logs de API Main, estos errores son normales y esperados, no indican un fallo en la aplicación.
+
+- Durante el primer despliegue es posible que los logs muestren un mensaje como *New primary port detected... Restarting deploy....*, es un comportamiento normal y no requiere ninguna acción por parte del usuario.
