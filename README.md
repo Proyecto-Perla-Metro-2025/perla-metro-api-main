@@ -70,7 +70,7 @@ El proyecto implementa una arquitectura de **Monolito Distribuido** bajo un enfo
 | `DELETE` | `/api/routes/{id}` | Eliminar ruta (soft delete)      | JWT + Admin    |
 | `GET`    | `/api/Station`     | Listar todas las estaciones      | JWT + Admin    |
 | `POST`   | `/api/Station`     | Crear nueva estación             | JWT + Admin    |
-| `GET`    | `/api/Station/{id}`| Obtener estación por ID          | -              |
+| `GET`    | `/api/Station/{id}`| Obtener estación por ID          | No Requerida   |
 | `PUT`    | `/api/Station/{id}`| Actualizar estación              | JWT + Admin    |
 | `DELETE` | `/api/Station/{id}`| Eliminar estación (soft delete)  | JWT + Admin    |
 
@@ -198,11 +198,10 @@ Response (200 OK):
 ```
 
 ### Ejemplos de uso Station-Service (Postman):
-Considerando tu URL como = *"https://nombre-repositorio.onrender.com"*
 
 **1. POST:**
 ```
-URL: https://nombre-repositorio.onrender.com/api/Station
+URL: https://perla-metro-api-main-ohy4.onrender.com/api/Station
 Body (JSON):
 {
   "Name": "Estación La Torre",
@@ -562,4 +561,5 @@ Response (200 OK):
 - Durante el primer despliegue es posible que los logs muestren un mensaje como *New primary port detected... Restarting deploy....*, es un comportamiento normal y no requiere ninguna acción por parte del usuario.
 
 ### URL de Despliegue Directo
+
 El despliegue de este servicio se encuentra en `https://perla-metro-api-main-ohy4.onrender.com/`.
