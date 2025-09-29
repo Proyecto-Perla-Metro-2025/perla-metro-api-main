@@ -35,6 +35,14 @@ namespace ApiMain.src.Services
             _userApiBaseUrl = _configuration["UserAPI:BaseUrl"];
         }
 
+        /// <summary>
+        /// The function `GetServiceTokenAsync` retrieves a service token from cache if available,
+        /// otherwise returns "no token".
+        /// </summary>
+        /// <returns>
+        /// If the token is found in the cache, the cached token will be returned. Otherwise, "no token"
+        /// will be returned.
+        /// </returns>
         public async Task<string> GetServiceTokenAsync()
         {
             const string cacheKey = "service_token";
@@ -46,6 +54,14 @@ namespace ApiMain.src.Services
 
             return "no token";
         }
+        /// <summary>
+        /// The function GetCurrentUserId retrieves the current user's ID from cache or returns "no
+        /// user" if not found.
+        /// </summary>
+        /// <returns>
+        /// If the value is found in the cache, the user ID will be returned. Otherwise, the string "no
+        /// user" will be returned.
+        /// </returns>
         public async Task<string> GetCurrentUserId()
         {
             const string cacheKey = "UserId";
@@ -57,6 +73,18 @@ namespace ApiMain.src.Services
 
             return "no user";
         }
+        /// <summary>
+        /// This C# function updates a user by sending a PUT request to the user API with the provided
+        /// user data and returns the updated user information.
+        /// </summary>
+        /// <param name="UpdateUserDto">The `UpdateUserDto` parameter in the `UpdateUser` method is a
+        /// data transfer object (DTO) that contains the information needed to update a user. It likely
+        /// includes properties such as the user's ID, name, email, or any other fields that can be
+        /// updated for a user.</param>
+        /// <returns>
+        /// The method `UpdateUser` is returning a `Task<UserDto>`, which is an asynchronous operation
+        /// that will eventually return a `UserDto` object.
+        /// </returns>
         public async Task<UserDto> UpdateUser(UpdateUserDto updateUserDto)
         {
 
@@ -76,6 +104,21 @@ namespace ApiMain.src.Services
 
             return await response.Content.ReadFromJsonAsync<UserDto>();
         }
+        /// <summary>
+        /// The `LoginAsync` function validates user credentials, generates a JWT token, caches it, and
+        /// returns a `LoginResponse` object.
+        /// </summary>
+        /// <param name="LoginRequest">The `LoginAsync` method you provided is responsible for handling
+        /// the login process. It takes a `LoginRequest` object as a parameter, which likely contains
+        /// the user's email and password for authentication.</param>
+        /// <returns>
+        /// The `LoginAsync` method returns a `Task<LoginResponse>`. The `LoginResponse` object contains
+        /// the following properties:
+        /// - `Token`: A JWT token generated using the user's claims.
+        /// - `ExpiresAt`: The expiration time of the JWT token (calculated as the current time plus 60
+        /// minutes).
+        /// - `User`: An object of type `UserInfo` containing the user's information
+        /// </returns>
         public async Task<LoginResponse> LoginAsync(LoginRequest request)
         {
             try
@@ -143,6 +186,17 @@ namespace ApiMain.src.Services
             }
         }
 
+        /// <summary>
+        /// This C# function asynchronously retrieves user data from an API based on the provided ID.
+        /// </summary>
+        /// <param name="id">The `id` parameter in the `getUser` method is used to specify the unique
+        /// identifier of the user whose information you want to retrieve.</param>
+        /// <returns>
+        /// The `getUser` method returns a `Task` that will eventually contain a `VisualizeUserDto`
+        /// object representing a user. If the HTTP response is successful (status code 200), the method
+        /// will read the response content as a `VisualizeUserDto` object and return it. Otherwise, it
+        /// will return `null`.
+        /// </returns>
         public async Task<VisualizeUserDto> getUser(string id)
         {
             var response = await _httpClient.GetAsync(
@@ -155,6 +209,14 @@ namespace ApiMain.src.Services
             return null;
 
         }
+        /// <summary>
+        /// This C# function asynchronously retrieves a list of VisualizeUserDto objects from a user API
+        /// endpoint using a bearer token for authorization.
+        /// </summary>
+        /// <returns>
+        /// A `Task` that will eventually contain a `List` of `VisualizeUserDto` objects, or `null` if
+        /// the HTTP response is not successful.
+        /// </returns>
         public async Task<List<VisualizeUserDto>?> getAll()
         {
 
@@ -172,6 +234,20 @@ namespace ApiMain.src.Services
             return null;
         }
 
+        /// <summary>
+        /// The function `ValidateTokenAsync` asynchronously validates a token and returns a
+        /// `TokenValidationResponse` indicating whether the token is valid or not.
+        /// </summary>
+        /// <param name="token">The `ValidateTokenAsync` method takes a `token` as input parameter. This
+        /// token is used to validate the user's authentication token. If the token is valid, the method
+        /// returns a `TokenValidationResponse` indicating that the token is valid along with the user's
+        /// claims. If the token is</param>
+        /// <returns>
+        /// The `ValidateTokenAsync` method returns a `Task` that will eventually contain a
+        /// `TokenValidationResponse`. The `TokenValidationResponse` object contains information about
+        /// whether the token is valid or not, along with any error messages if the validation process
+        /// encounters an exception.
+        /// </returns>
         public Task<TokenValidationResponse> ValidateTokenAsync(string token)
         {
             try
@@ -203,6 +279,14 @@ namespace ApiMain.src.Services
             }
         }
 
+        /// <summary>
+        /// The function `EnableDisableUser` asynchronously enables or disables a user by sending a PUT
+        /// request to the user API with appropriate error handling.
+        /// </summary>
+        /// <param name="id">The `EnableDisableUser` method takes a `string id` parameter, which
+        /// represents the unique identifier of the user whose enable/disable status needs to be
+        /// updated. This method sends a PUT request to the user API endpoint with the user's ID to
+        /// enable or disable the user based on the response from the</param>
         public async Task EnableDisableUser(string id)
         {
             string token = await GetServiceTokenAsync();
@@ -231,6 +315,17 @@ namespace ApiMain.src.Services
             };
         }
 
+        /// <summary>
+        /// This C# async function registers a new user by calling a User API and handling potential
+        /// exceptions.
+        /// </summary>
+        /// <param name="CreateUserDto">CreateUserDto is a data transfer object (DTO) that contains the
+        /// information needed to create a new user. It typically includes properties such as username,
+        /// email, password, and any other required user details.</param>
+        /// <returns>
+        /// The method `RegisterUser` returns a `Task<UserDto>`, which is an asynchronous operation that
+        /// will eventually produce a `UserDto` object.
+        /// </returns>
         public async Task<UserDto> RegisterUser(CreateUserDto createUserDto)
         {
             try
@@ -253,6 +348,17 @@ namespace ApiMain.src.Services
             }
         }
 
+        /// <summary>
+        /// This C# function asynchronously retrieves a list of users based on specified query
+        /// parameters using an HTTP GET request.
+        /// </summary>
+        /// <param name="QueryObject">The `GetUsersFilter` method you provided is an asynchronous method
+        /// that retrieves a list of users based on the provided `QueryObject` parameters. Here is a
+        /// breakdown of the parameters used in the method:</param>
+        /// <returns>
+        /// The method `GetUsersFilter` returns a `Task` that will eventually contain a `List` of
+        /// `VisualizeUserDto` objects.
+        /// </returns>
         public async Task<List<VisualizeUserDto>> GetUsersFilter(QueryObject queryObject)
         {
             string token = await GetServiceTokenAsync();
@@ -281,6 +387,8 @@ namespace ApiMain.src.Services
     }
 
     
+    /* The class ServiceUnavailableException is a custom exception in C# that represents a service
+    being unavailable. */
     public class ServiceUnavailableException : Exception
     {
         public ServiceUnavailableException(string message) : base(message) { }
@@ -288,6 +396,20 @@ namespace ApiMain.src.Services
 
     public static class RequestBuilder
     {
+        /// <summary>
+        /// This C# function builds a JSON request for updating user information based on the provided
+        /// data transfer object (DTO).
+        /// </summary>
+        /// <param name="UpdateUserDto">The `BuildUserUpdateRequest` method takes an `UpdateUserDto`
+        /// object as a parameter. This object likely contains information about a user that needs to be
+        /// updated, such as email, password, name, and surname.</param>
+        /// <returns>
+        /// The method `BuildUserUpdateRequest` returns a `StringContent` object containing the JSON
+        /// representation of the `UpdateUserDto` object provided as input. The JSON is generated based
+        /// on the properties of the `UpdateUserDto` object, with empty strings converted to `null`
+        /// values to be ignored during serialization. The JSON is formatted with indentation for
+        /// readability and the content type is set to "application
+        /// </returns>
         public static StringContent BuildUserUpdateRequest(UpdateUserDto dto)
         {
             if (dto == null)
@@ -310,32 +432,6 @@ namespace ApiMain.src.Services
             };
 
             string json = JsonSerializer.Serialize(dtoForJson, options);
-
-            return new StringContent(json, Encoding.UTF8, "application/json");
-        }
-        public static StringContent BuildUserQueryRequest(QueryObject queryObject)
-        {
-            if (queryObject == null)
-                throw new ArgumentNullException(nameof(queryObject));
-
-            var options = new JsonSerializerOptions
-            {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, // skip null fields
-                WriteIndented = true // optional, makes JSON readable
-            };
-
-            // Convert empty strings to null, so they are ignored
-            var queryObjectForJson = new
-            {
-                email = string.IsNullOrWhiteSpace(queryObject.Email) ? null : queryObject.Email,
-                name = string.IsNullOrWhiteSpace(queryObject.Name) ? null : queryObject.Name,
-                isActive = queryObject.isActive.HasValue ? null : queryObject.isActive
-
-            };
-
-
-
-            string json = JsonSerializer.Serialize(queryObjectForJson, options);
 
             return new StringContent(json, Encoding.UTF8, "application/json");
         }
