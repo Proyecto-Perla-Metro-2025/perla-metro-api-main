@@ -29,6 +29,18 @@ namespace ApiMain.src.Services
             _jwtExpirationMinutes = int.Parse(_configuration["Jwt:ExpirationMinutes"] ?? "60");
         }
         
+        /// <summary>
+        /// The function `GenerateJwtToken` creates a JWT token with specified claims, issuer, audience,
+        /// expiration time, and signing credentials.
+        /// </summary>
+        /// <param name="claims">The `GenerateJwtToken` method takes a list of `Claim` objects as input.
+        /// These claims represent the information that will be included in the JWT token. Each `Claim`
+        /// object typically consists of a claim type and a claim value.</param>
+        /// <returns>
+        /// The method `GenerateJwtToken` returns a JWT (JSON Web Token) string generated based on the
+        /// provided list of claims and configured settings such as issuer, audience, expiration time,
+        /// and signing credentials.
+        /// </returns>
         public string GenerateJwtToken(List<Claim> claims)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSecret));
@@ -54,6 +66,18 @@ namespace ApiMain.src.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
         
+        /// <summary>
+        /// The function `ValidateToken` validates a JWT token based on specified parameters and returns
+        /// a `ClaimsPrincipal` if the token is valid.
+        /// </summary>
+        /// <param name="token">The `token` parameter in the `ValidateToken` method is the JWT (JSON Web
+        /// Token) that needs to be validated. This token is passed to the method for validation against
+        /// the specified validation parameters and secret key.</param>
+        /// <returns>
+        /// The method `ValidateToken` returns a `ClaimsPrincipal` object if the token is successfully
+        /// validated and passes all the validation checks. If the token is invalid, expired, has an
+        /// invalid signature, or fails validation for any reason, the method returns `null`.
+        /// </returns>
         public ClaimsPrincipal? ValidateToken(string token)
         {
             if (string.IsNullOrWhiteSpace(token))
@@ -109,6 +133,16 @@ namespace ApiMain.src.Services
             }
         }
         
+        /// <summary>
+        /// The IsTokenValid function checks if a token is valid by validating it and returning a
+        /// boolean result.
+        /// </summary>
+        /// <param name="token">A string representing a token that needs to be validated.</param>
+        /// <returns>
+        /// The method `IsTokenValid` is returning a boolean value, which indicates whether the token is
+        /// valid or not. It returns `true` if the `principal` object returned by the `ValidateToken`
+        /// method is not null, and `false` otherwise.
+        /// </returns>
         public bool IsTokenValid(string token)
         {
             var principal = ValidateToken(token);

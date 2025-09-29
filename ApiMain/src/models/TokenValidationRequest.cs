@@ -7,6 +7,9 @@ namespace ApiMain.src.models
 {
     public class TokenValidationRequest
     {
+        /// <summary>
+        /// Token with the user's claims
+        /// </summary>
         public required string Token { get; set; }
     }
 }
